@@ -1,0 +1,76 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - link "🧠 Personal Memory Portable Digital Vault" [ref=e6] [cursor=pointer]:
+          - /url: "#welcome"
+          - generic [ref=e7]: 🧠
+          - generic [ref=e8]:
+            - generic [ref=e9]: Personal Memory
+            - generic [ref=e10]: Portable Digital Vault
+        - navigation [ref=e11]:
+          - link "💬 AI Interview Chat" [ref=e12] [cursor=pointer]:
+            - /url: "#chat"
+            - generic [ref=e13]: 💬
+            - generic [ref=e14]: AI Interview Chat
+          - link "🧠 Memory Vault" [ref=e15] [cursor=pointer]:
+            - /url: "#memory"
+            - generic [ref=e16]: 🧠
+            - generic [ref=e17]: Memory Vault
+          - link "📊 Dashboard" [ref=e18] [cursor=pointer]:
+            - /url: "#dashboard"
+            - generic [ref=e19]: 📊
+            - generic [ref=e20]: Dashboard
+          - link "⏳ Life Timeline" [ref=e21] [cursor=pointer]:
+            - /url: "#timeline"
+            - generic [ref=e22]: ⏳
+            - generic [ref=e23]: Life Timeline
+          - link "⚙️ Settings & API Key" [ref=e24] [cursor=pointer]:
+            - /url: "#settings"
+            - generic [ref=e25]: ⚙️
+            - generic [ref=e26]: Settings & API Key
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]: Memory Vault Depth
+          - generic [ref=e31]:
+            - generic [ref=e32]: 0 memories recorded
+            - generic [ref=e33]: 0%
+        - button "📥 Export Markdown" [ref=e34] [cursor=pointer]
+  - main [ref=e36]:
+    - generic [ref=e37]:
+      - generic [ref=e38]: 🧠 AI Biographer & Memory Vault
+      - heading "Let's build your digital memory." [level=1] [ref=e40]
+      - paragraph [ref=e41]: What if you could create a structured digital representation of yourself that another AI could understand? Your life, personality, experiences, goals, and wisdom — stored safely in portable Markdown.
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - generic [ref=e44]: Google Gemini API Key (Free Tier)
+          - textbox "Google Gemini API Key (Free Tier)" [ref=e45]:
+            - /placeholder: AIzaSy...
+          - generic [ref=e46]:
+            - text: 💡 Get a free API key instantly at
+            - link "Google AI Studio" [ref=e47] [cursor=pointer]:
+              - /url: https://aistudio.google.com/
+            - text: . No credit card required. Your key remains private in your browser.
+        - generic [ref=e48]:
+          - generic [ref=e49]: Selected Model
+          - combobox "Selected Model" [ref=e50]:
+            - option "gemini-2.5-flash (Latest — default)" [selected]
+            - option "gemini-2.0-flash-lite (Very high quota free model)"
+            - option "gemini-2.0-flash (Fast intelligence)"
+            - option "gemini-flash-latest (Gemini 1.5 Flash stable)"
+            - option "gemini-2.5-pro (Highly intelligent reasoning)"
+          - generic [ref=e51]: 💡 Switch models if you hit API quota limits.
+        - button "Start Building Your Memory →" [ref=e52] [cursor=pointer]
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - generic [ref=e56]: 💬
+          - generic [ref=e57]: Intelligent Interviewer
+          - generic [ref=e58]: Asks thoughtful follow-up questions tailored to your story instead of static questionnaires.
+        - generic [ref=e59]:
+          - generic [ref=e60]: 🔒
+          - generic [ref=e61]: 100% Private & Local
+          - generic [ref=e62]: All memory records live exclusively in your browser's local storage. You own your data.
+        - generic [ref=e63]:
+          - generic [ref=e64]: 📝
+          - generic [ref=e65]: Portable Markdown Export
+          - generic [ref=e66]: Export your structured knowledge base anytime for future AI models or personal archiving.

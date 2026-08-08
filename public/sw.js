@@ -3,7 +3,7 @@
  * Provides offline caching for static assets so the app installs on Android / desktop.
  */
 
-const CACHE_NAME = 'personal-memory-v1';
+const CACHE_NAME = 'personal-memory-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -21,7 +21,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate: clean up old caches
+// Activate: clean up ALL old caches immediately
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
