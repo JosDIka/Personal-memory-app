@@ -1,0 +1,167 @@
+MASTER PROMPT — BUILD MY PERSONAL AI MEMORY WEB APP
+
+1. ROLE
+
+Act as a senior full-stack engineer, product designer, UX/UI designer, database architect, AI engineer, and privacy-focused application architect.
+
+Your task is to design and build a complete, modern web application called Personal Memory.
+
+Do not treat this as a simple notes app.
+
+The purpose of this application is to create a portable digital memory of the user — a continuously evolving, structured representation of the user's life, personality, experiences, goals, relationships, interests, knowledge, preferences, projects, and important memories.
+
+The application should gradually learn about the user through intelligent conversations and questions, organize what it learns, and store the resulting memory in human-readable Markdown files.
+
+The user's data belongs to the user.
+
+The memory should be portable and usable by other AI systems in the future.
+
+---
+
+2. CORE VISION
+
+Build an application that answers this question:
+
+«"What if I could create a structured digital memory of myself that another AI could understand?"»
+
+The application should interview the user, learn about them over time, organize their information, detect changes, and maintain a continuously updated personal memory.
+
+The system should not simply record everything the user says.
+
+It should determine what information is meaningful, what is temporary, what should become long-term memory, and what needs confirmation.
+
+The final result should be a structured personal knowledge base that can be exported as Markdown.
+
+---
+
+3. MAIN USER EXPERIENCE
+
+When the user first opens the application, they should be welcomed with something similar to:
+
+«"Let's build your memory."»
+
+Explain that the application will gradually learn about them by asking questions.
+
+Do NOT overwhelm the user with a huge questionnaire.
+
+Instead, create an intelligent interview system.
+
+Start with basic questions and progressively become more detailed.
+
+Example progression:
+
+Stage 1 — Identity
+
+Ask things such as:
+
+- What should I call you?
+- Where are you from?
+- What is important for you to know about yourself?
+- How would you describe yourself?
+- What are some things that define you?
+
+Stage 2 — Life
+
+Ask about:
+
+- Childhood
+- Education
+- Family
+- Major life events
+- Important experiences
+- Achievements
+- Difficult experiences
+- Lessons learned
+
+Stage 3 — Personality
+
+Ask about:
+
+- Personality
+- Strengths
+- Weaknesses
+- Habits
+- Preferences
+- Things the user likes
+- Things the user dislikes
+- Values
+- Principles
+
+Stage 4 — Relationships
+
+Ask about:
+
+- Family
+- Friends
+- Important people
+- Relationships
+- People who influenced the user
+- Important memories involving people
+
+Stage 5 — Goals
+
+Ask about:
+
+- Current goals
+- Career goals
+- Financial goals
+- Personal goals
+- Dreams
+- Long-term plans
+- Things the user wants to learn
+
+Stage 6 — Projects & Interests
+
+Ask about:
+
+- Current projects
+- Past projects
+- Skills
+- Hobbies
+- Interests
+- Things the user is learning
+- Future ideas
+
+Stage 7 — Continuous Learning
+
+After the initial interview, the system should continue learning naturally through conversations.
+
+---
+
+4. INTELLIGENT INTERVIEW SYSTEM
+
+Create an AI interviewer.
+
+The interviewer should NOT randomly ask questions.
+
+It should examine the existing memory and determine:
+
+1. What does the system already know?
+2. What information is missing?
+3. What information is outdated?
+4. What information is contradictory?
+5. What areas deserve deeper exploration?
+
+Then generate the next useful question.
+
+For example:
+
+User previously said:
+
+«"I want to become financially independent."»
+
+Later the AI might ask:
+
+«"You previously mentioned financial independence. What does financial independence mean to you personally?"»
+
+The system should use previous answers to create meaningful follow-up questions.
+
+---
+
+5. MEMORY EXTRACTION
+
+After every meaningful conversation, the AI should analyze the conversation and identify information that may belong in the user's memory.
+
+For each candidate memory, determine:
+
+- Category

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="100" fill="#0b0d1e"/>
+  <g transform="translate(256,256)">
+    <!-- Brain left -->
+    <path d="M-22,-128 C-96,-128 -138,-85 -138,-21 C-138,21 -117,53 -85,74 C-101,95 -128,128 -128,149 L-43,149 C-43,128 -32,107 -11,96 C0,107 22,128 22,149 L107,149 C107,128 85,96 64,74 C85,53 107,21 107,-21 C107,-85 74,-128 22,-128 Z" fill="url(#g)" opacity="0.9"/>
+    <!-- Brain right -->
+    <path d="M22,-128 C85,-128 138,-75 138,-11 C138,32 117,64 85,74" fill="none" stroke="#ec4899" stroke-width="6" opacity="0.6"/>
+    <path d="M-85,74 C-96,85 -107,107 -107,128" fill="none" stroke="#8b5cf6" stroke-width="6" opacity="0.6"/>
+    <!-- Neural dots -->
+    <circle cx="-53" cy="-53" r="8" fill="#fff" opacity="0.8"/>
+    <circle cx="43" cy="-43" r="7" fill="#fff" opacity="0.7"/>
+    <circle cx="-21" cy="21" r="5.5" fill="#fff" opacity="0.6"/>
+    <circle cx="64" cy="11" r="7" fill="#fff" opacity="0.7"/>
+    <circle cx="-75" cy="-11" r="5.5" fill="#fff" opacity="0.5"/>
+    <circle cx="0" cy="-75" r="6" fill="#fff" opacity="0.6"/>
+    <!-- Neural connections -->
+    <line x1="-53" y1="-53" x2="43" y2="-43" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    <line x1="-53" y1="-53" x2="-21" y2="21" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    <line x1="43" y1="-43" x2="64" y2="11" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    <line x1="-21" y1="21" x2="64" y2="11" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    <line x1="0" y1="-75" x2="-53" y2="-53" stroke="#fff" stroke-width="2" opacity="0.2"/>
+    <line x1="0" y1="-75" x2="43" y2="-43" stroke="#fff" stroke-width="2" opacity="0.2"/>
+  </g>
+</svg>
