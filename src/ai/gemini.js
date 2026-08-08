@@ -63,15 +63,18 @@ export class GeminiService {
   }
 
   /**
-   * Format memory store entries into a concise summary for prompt context
+   * Format memory store entries into a concise summary for prompt context.
+   * Caps to the most recent N memories to prevent token bloat.
    */
-  getMemorySummary() {
+  getMemorySummary(limit = 100) {
     const memories = memoryStore.getAll();
     if (memories.length === 0) {
       return 'No existing memories recorded yet. This is your first interaction with the user.';
     }
 
-    return memories.map(m => `-[${m.category.toUpperCase()}] ${m.title}: ${m.content}`).join('\n');
+    // Use the most recent memories (already sorted newest-first by store)
+    const recent = memories.slice(0, limit);
+    return recent.map(m => `-[${m.category.toUpperCase()}] ${m.title}: ${m.content}`).join('\n');
   }
 
   sanitizeContents(contents) {
