@@ -55,17 +55,50 @@ export function renderSidebar(currentPath) {
         </div>
 
         <button id="quick-export-btn" class="btn btn-secondary btn-sm" style="width: 100%;">
-          <span>📥 Export Markdown</span>
+          <span>📥 Export Backup</span>
         </button>
+        <button id="quick-import-btn" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 6px;">
+          <span>📤 Import Backup</span>
+        </button>
+        <input type="file" id="quick-import-file" accept=".md,.json" style="display: none;" />
       </div>
     </div>
   `;
 
-  // Attach quick export listener
+  // Attach quick export listener (JSON by default for full fidelity)
   const exportBtn = document.getElementById('quick-export-btn');
   if (exportBtn) {
     exportBtn.addEventListener('click', () => {
-      markdownEngine.downloadMarkdownFile();
+      markdownEngine.downloadJSONFile();
+    });
+  }
+
+  // Attach quick import listener (supports both .md and .json)
+  const importBtn = document.getElementById('quick-import-btn');
+  const importFile = document.getElementById('quick-import-file');
+  if (importBtn && importFile) {
+    importBtn.addEventListener('click', () => importFile.click());
+    importFile.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        const content = evt.target.result;
+        let count = 0;
+        if (file.name.endsWith('.json')) {
+          count = markdownEngine.importFromJSON(content);
+        } else {
+          count = markdownEngine.importFromMarkdown(content);
+        }
+        if (count > 0) {
+          alert(`✅ Imported ${count} memories successfully!`);
+          renderSidebar(currentPath);
+        } else {
+          alert('⚠️ No memories found in the file. Make sure it was exported from this app.');
+        }
+      };
+      reader.readAsText(file);
+      importFile.value = '';
     });
   }
 }

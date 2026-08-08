@@ -83,17 +83,19 @@ export function renderSettingsView(container) {
       <div class="feature-card" style="margin-bottom: 2rem;">
         <h3 class="feature-title" style="margin-bottom: 1rem;">📦 Data Export & Import</h3>
         <p class="feature-desc" style="margin-bottom: 1.25rem;">
-          Export your personal memory vault into standard Markdown files for full portability, offline backups, or future AI model usage.
+          Export your personal memory vault for full portability, offline backups, or future AI model usage. JSON preserves all data perfectly; Markdown is human-readable.
         </p>
 
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <button id="export-md-btn" class="btn btn-primary btn-sm">
-            <span>📥 Export as Markdown (.md)</span>
+          <button id="export-json-btn" class="btn btn-primary btn-sm">
+            <span>📥 Export as JSON (Recommended)</span>
           </button>
-
+          <button id="export-md-btn" class="btn btn-secondary btn-sm">
+            <span>📥 Export as Markdown</span>
+          </button>
           <label class="btn btn-secondary btn-sm" style="cursor: pointer;">
-            <span>📤 Import Markdown File</span>
-            <input type="file" id="import-md-input" accept=".md,.markdown,.txt" style="display: none;" />
+            <span>📤 Import Backup (.json or .md)</span>
+            <input type="file" id="import-file-input" accept=".json,.md,.markdown,.txt" style="display: none;" />
           </label>
         </div>
       </div>
@@ -192,20 +194,34 @@ export function renderSettingsView(container) {
     toast.show(`Interview stage set to Stage ${stageId}`, 'info');
   });
 
+  document.getElementById('export-json-btn').addEventListener('click', () => {
+    markdownEngine.downloadJSONFile();
+    toast.show('JSON backup downloaded! 📥', 'success');
+  });
+
   document.getElementById('export-md-btn').addEventListener('click', () => {
     markdownEngine.downloadMarkdownFile();
     toast.show('Markdown export downloaded! 📥', 'success');
   });
 
-  document.getElementById('import-md-input').addEventListener('change', (e) => {
+  document.getElementById('import-file-input').addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
     reader.onload = (event) => {
       const content = event.target.result;
-      const count = markdownEngine.importFromMarkdown(content);
-      toast.show(`Successfully imported ${count} memory entries! 🧠`, 'success');
+      let count = 0;
+      if (file.name.endsWith('.json')) {
+        count = markdownEngine.importFromJSON(content);
+      } else {
+        count = markdownEngine.importFromMarkdown(content);
+      }
+      if (count > 0) {
+        toast.show(`Successfully imported ${count} memory entries! 🧠`, 'success');
+      } else {
+        toast.show('No memories found in the file.', 'warning');
+      }
       renderSettingsView(container);
     };
     reader.readAsText(file);

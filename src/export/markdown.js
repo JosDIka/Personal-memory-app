@@ -136,6 +136,59 @@ generator: Personal Memory Web App
     saveCurrent(); // Save final pending item
     return importedCount;
   }
+
+  /**
+   * Export all memories as JSON (preserves all data perfectly)
+   */
+  exportToJSON() {
+    const memories = memoryStore.getAll();
+    return JSON.stringify(memories, null, 2);
+  }
+
+  /**
+   * Trigger browser file download of the JSON file
+   */
+  downloadJSONFile(filename = 'Personal_Memory.json') {
+    const content = this.exportToJSON();
+    const blob = new Blob([content], { type: 'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+  /**
+   * Import memories from a JSON string (full fidelity restore)
+   */
+  importFromJSON(jsonContent) {
+    if (!jsonContent || typeof jsonContent !== 'string') return 0;
+    try {
+      const memories = JSON.parse(jsonContent);
+      if (!Array.isArray(memories)) return 0;
+      let count = 0;
+      memories.forEach(m => {
+        memoryStore.addMemory({
+          category: m.category || 'identity',
+          subcategory: m.subcategory || 'general',
+          title: m.title || 'Untitled',
+          content: m.content || '',
+          confidence: m.confidence || 'confirmed',
+          tags: m.tags || [],
+          date: m.date || null,
+          source: 'json-import'
+        });
+        count++;
+      });
+      return count;
+    } catch (e) {
+      console.error('JSON import error:', e);
+      return 0;
+    }
+  }
 }
 
 export const markdownEngine = new MarkdownEngine();
