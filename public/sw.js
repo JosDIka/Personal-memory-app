@@ -1,9 +1,10 @@
 /**
  * Personal Memory — Service Worker
- * Provides offline caching for static assets so the app installs on Android / desktop.
+ * Network-first strategy so deployments show fresh content immediately.
+ * Falls back to cache only when offline.
  */
 
-const CACHE_NAME = 'personal-memory-v2';
+const CACHE_NAME = 'personal-memory-v4';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -21,7 +22,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate: clean up ALL old caches immediately
+// Activate: clean up ALL old caches immediately and take control
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
@@ -34,43 +35,33 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch: cache-first for static assets, network-first for everything else (API calls, etc.)
+// Fetch: NETWORK-FIRST for all same-origin requests.
+// This ensures fresh content after every deploy — no more blank screens.
+// Falls back to cache only when the network is unavailable (offline support).
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
-  // Skip non-GET requests and cross-origin API calls
+  // Skip non-GET requests and cross-origin API calls (Gemini, Google Fonts, etc.)
   if (request.method !== 'GET') return;
+  if (!request.url.startsWith(self.location.origin)) return;
 
-  // For same-origin requests: cache-first strategy
-  if (request.url.startsWith(self.location.origin)) {
-    event.respondWith(
-      caches.match(request)
-        .then(cached => {
-          if (cached) return cached;
-
-          return fetch(request).then(response => {
-            // Only cache successful responses
-            if (!response || response.status !== 200) return response;
-
-            // Clone and cache the response
-            const responseClone = response.clone();
-            caches.open(CACHE_NAME).then(cache => {
-              cache.put(request, responseClone);
-            });
-
-            return response;
+  event.respondWith(
+    fetch(request)
+      .then(response => {
+        // Got a fresh response — cache it for offline use
+        if (response && response.status === 200) {
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(request, responseClone);
           });
-        })
-        .catch(() => {
-          // Offline fallback: return index.html for navigation requests
-          if (request.mode === 'navigate') {
-            return caches.match('/index.html');
-          }
-        })
-    );
-    return;
-  }
-
-  // For cross-origin requests (Gemini API): network-only
-  // The API requires a key and returns dynamic data — don't cache it
+        }
+        return response;
+      })
+      .catch(() => {
+        // Network failed — serve from cache (offline fallback)
+        return caches.match(request).then(cached => {
+          return cached || caches.match('/index.html');
+        });
+      })
+  );
 });
